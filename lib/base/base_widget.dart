@@ -18,8 +18,6 @@ class BaseWidget<T extends ChangeNotifier> extends StatefulWidget {
   final void Function(T model)? onPageResume;
   final void Function(T model)? onPagePause;
 
-  final Future<bool> Function(T model)? onBackButtonPressed;
-
   const BaseWidget({
     required this.builder,
     required this.model,
@@ -27,7 +25,6 @@ class BaseWidget<T extends ChangeNotifier> extends StatefulWidget {
     this.onModelReady,
     this.onPageResume,
     this.onPagePause,
-    this.onBackButtonPressed,
     Key? key,
   }) : super(key: key);
 
@@ -67,13 +64,6 @@ class BaseWidgetState<T extends ChangeNotifier> extends State<BaseWidget<T>> {
         )
       : child;
 
-  Widget _backButtonListener({required Widget child}) => widget.onBackButtonPressed != null
-      ? BackButtonListener(
-          onBackButtonPressed: () => widget.onBackButtonPressed!(model),
-          child: child,
-        )
-      : child;
-
   Widget _mainContainer() => ChangeNotifierProvider<T>(
         create: (_) => model,
         child: Consumer<T>(
@@ -84,8 +74,6 @@ class BaseWidgetState<T extends ChangeNotifier> extends State<BaseWidget<T>> {
 
   @override
   Widget build(BuildContext context) => _focusDetector(
-        child: _backButtonListener(
-          child: _mainContainer(),
-        ),
+        child: _mainContainer(),
       );
 }

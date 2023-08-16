@@ -17,60 +17,65 @@ class LockScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BaseWidget<LockScreenViewmodel>(
-      model: LockScreenViewmodel(context: context),
-      builder: (_, model, __) {
-        var padding = 24.0;
-        var width = context.media.size.width - (padding * 4);
-        var widthWithoutPadding = width / 3;
-        return Scaffold(
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  6,
-                  (index) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(index >= model.passcodeLength ? FontAwesomeIcons.circle : FontAwesomeIcons.circleDot),
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: BaseWidget<LockScreenViewmodel>(
+        model: LockScreenViewmodel(context: context),
+        builder: (_, model, __) {
+          var padding = 24.0;
+          var width = context.media.size.width - (padding * 4);
+          var widthWithoutPadding = width / 3;
+          return Scaffold(
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    6,
+                    (index) => Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(index >= model.passcodeLength ? FontAwesomeIcons.circle : FontAwesomeIcons.circleDot),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: padding),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: padding),
-                child: Wrap(
-                  runSpacing: padding,
-                  spacing: padding,
-                  children: List.generate(9, (index) {
-                    String value = (index + 1).toString();
-                    return _button(
-                      context,
-                      value: value,
-                      model: model,
-                      widthWithoutPadding: widthWithoutPadding,
-                    );
-                  }),
+                SizedBox(height: padding),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: padding),
+                  child: Wrap(
+                    runSpacing: padding,
+                    spacing: padding,
+                    children: List.generate(9, (index) {
+                      String value = (index + 1).toString();
+                      return _button(
+                        context,
+                        value: value,
+                        model: model,
+                        widthWithoutPadding: widthWithoutPadding,
+                      );
+                    }),
+                  ),
                 ),
-              ),
-              SizedBox(height: padding),
-              _button(
-                context,
-                value: '0',
-                model: model,
-                widthWithoutPadding: widthWithoutPadding,
-              ),
-            ],
-          ),
-          floatingActionButton: model.showRemoveButton
-              ? FloatingActionButton(
-                  onPressed: () => model.removePasscode(),
-                  child: const Icon(FontAwesomeIcons.deleteLeft),
-                )
-              : null,
-        );
-      },
+                SizedBox(height: padding),
+                _button(
+                  context,
+                  value: '0',
+                  model: model,
+                  widthWithoutPadding: widthWithoutPadding,
+                ),
+              ],
+            ),
+            floatingActionButton: model.showRemoveButton
+                ? FloatingActionButton(
+                    onPressed: () => model.removePasscode(),
+                    child: const Icon(FontAwesomeIcons.deleteLeft),
+                  )
+                : null,
+          );
+        },
+      ),
     );
   }
 
