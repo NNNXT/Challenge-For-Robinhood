@@ -16,7 +16,7 @@ class LockScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<LockScreenViewmodel>(
-      model: LockScreenViewmodel(),
+      model: LockScreenViewmodel(context: context),
       builder: (_, model, __) {
         var padding = 24.0;
         var width = context.media.size.width - (padding * 4);
@@ -83,7 +83,7 @@ class LockScreen extends StatelessWidget {
         bool? match = await model.updatePasscode(value: value);
         if (match != null && context.mounted) {
           if (match) {
-            context.showToast(msg: 'Password Match');
+            model.updateModeUnlock();
           } else {
             context.showToast(msg: 'password_not_match'.tr());
           }
