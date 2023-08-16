@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 
-// Internal Modules
-
 // Screen
+import 'package:challenge_for_robinhood/src/features/lock_screen/screen.dart';
 import 'package:challenge_for_robinhood/src/features/main_navigation/screen.dart';
 
 enum NavigatorRoutePath { home, lockScreen }
@@ -42,7 +41,12 @@ var _router = GoRouter(
     GoRoute(
       path: NavigatorRoutePath.home.path,
       builder: (_, __) => const MainNavigation(),
-      routes: const <RouteBase>[],
+      routes: <RouteBase>[
+        GoRoute(
+          path: NavigatorRoutePath.lockScreen.path,
+          builder: (_, __) => const LockScreen(),
+        ),
+      ],
     ),
   ],
 );
