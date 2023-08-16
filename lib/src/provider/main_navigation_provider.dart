@@ -2,13 +2,22 @@
 import 'package:flutter/material.dart';
 
 class MainNavigationProvider extends ChangeNotifier {
-  bool _modeUnlock = false;
+  DateTime? _lastUnlock;
+  bool _firstTime = true;
 
-  bool get modeUnlock => _modeUnlock;
+  DateTime? get lastUnlock => _lastUnlock;
+  bool get firstTime => _firstTime;
 
-  set modeUnlock(bool value) {
-    if (_modeUnlock != value) {
-      _modeUnlock = value;
+  set lastUnlock(DateTime? value) {
+    if (_lastUnlock != value) {
+      _lastUnlock = value;
+      notifyListeners();
+    }
+  }
+
+  set firstTime(bool value) {
+    if (_firstTime != value) {
+      _firstTime = value;
       notifyListeners();
     }
   }

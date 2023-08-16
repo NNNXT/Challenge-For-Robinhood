@@ -12,8 +12,8 @@ class LockScreenViewmodel extends ChangeNotifier {
   String _passcode = '';
 
   String get passcode => _passcode;
+  bool get firstTime => _mainNavigationProvider.firstTime;
   bool get showRemoveButton => _passcode.isNotEmpty;
-  bool get modeUnlock => _mainNavigationProvider.modeUnlock;
   int get passcodeLength => _passcode.length;
 
   Future<bool?> updatePasscode({required String value}) async {
@@ -38,16 +38,19 @@ class LockScreenViewmodel extends ChangeNotifier {
     return passwordMatch;
   }
 
-  void updateModeUnlock() {
-    _mainNavigationProvider.modeUnlock = !modeUnlock;
-    notifyListeners();
-  }
-
   void removePasscode() {
     if (_passcode.isNotEmpty) {
       _passcode = _passcode.substring(0, _passcode.length - 1);
       notifyListeners();
     }
+  }
+
+  void updateLastUnlock() {
+    _mainNavigationProvider.lastUnlock = DateTime.now();
+  }
+
+  void updateFirstTime() {
+    _mainNavigationProvider.firstTime = false;
   }
 
   LockScreenViewmodel({

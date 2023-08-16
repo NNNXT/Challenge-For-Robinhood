@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 // External Modules
 import 'package:easy_localization/easy_localization.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 // Internal Modules
 import 'package:challenge_for_robinhood/base/base_extension.dart';
 import 'package:challenge_for_robinhood/base/base_widget.dart';
+import 'package:challenge_for_robinhood/navigator_route.dart';
 import 'package:challenge_for_robinhood/src/features/lock_screen/viewmodel.dart';
 
 class LockScreen extends StatelessWidget {
@@ -83,7 +85,13 @@ class LockScreen extends StatelessWidget {
         bool? match = await model.updatePasscode(value: value);
         if (match != null && context.mounted) {
           if (match) {
-            model.updateModeUnlock();
+            model.updateLastUnlock();
+            if (model.firstTime) {
+              model.updateFirstTime();
+              context.pushReplacement(NavigatorRoutePath.todo.goPath);
+            } else {
+              context.pop();
+            }
           } else {
             context.showToast(msg: 'password_not_match'.tr());
           }

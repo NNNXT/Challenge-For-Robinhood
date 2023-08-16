@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:challenge_for_robinhood/base/base_widget.dart';
 import 'package:challenge_for_robinhood/src/features/lock_screen/screen.dart';
 import 'package:challenge_for_robinhood/src/features/main_navigation/viewmodel.dart';
+import 'package:challenge_for_robinhood/src/features/todo/screen.dart';
 
 class MainNavigation extends StatelessWidget {
   const MainNavigation({super.key});
@@ -14,18 +15,7 @@ class MainNavigation extends StatelessWidget {
     return BaseWidget<MainNavigationViewModel>(
       model: MainNavigationViewModel(context: context),
       builder: (_, model, __) {
-        return model.modeUnlock
-            ? Scaffold(
-                body: Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      model.updateModeUnlock();
-                    },
-                    child: const Text('Button'),
-                  ),
-                ),
-              )
-            : const LockScreen();
+        return model.firstTime ? const LockScreen() : const TodoScreen();
       },
     );
   }

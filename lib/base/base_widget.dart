@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 // External Modules
+import 'package:focus_detector/focus_detector.dart';
 import 'package:provider/provider.dart';
 
 class BaseWidget<T extends ChangeNotifier> extends StatefulWidget {
@@ -14,12 +15,19 @@ class BaseWidget<T extends ChangeNotifier> extends StatefulWidget {
   final T model;
   final Widget? child;
   final void Function(T model)? onModelReady;
+  final void Function(T model)? onPageResume;
+  final void Function(T model)? onPagePause;
+
+  final Future<bool> Function(T model)? onBackButtonPressed;
 
   const BaseWidget({
     required this.builder,
     required this.model,
     this.child,
     this.onModelReady,
+    this.onPageResume,
+    this.onPagePause,
+    this.onBackButtonPressed,
     Key? key,
   }) : super(key: key);
 
@@ -29,6 +37,8 @@ class BaseWidget<T extends ChangeNotifier> extends StatefulWidget {
 
 class BaseWidgetState<T extends ChangeNotifier> extends State<BaseWidget<T>> {
   late T model;
+
+  bool get _isNeedFocusDetector => widget.onPageResume != null || widget.onPagePause != null;
 
   @override
   void initState() {
@@ -41,18 +51,41 @@ class BaseWidgetState<T extends ChangeNotifier> extends State<BaseWidget<T>> {
     super.initState();
   }
 
+  Widget _focusDetector({required Widget child}) => _isNeedFocusDetector
+      ? FocusDetector(
+          onFocusGained: () {
+            if (widget.onPageResume != null) {
+              widget.onPageResume!(model);
+            }
+          },
+          onFocusLost: () {
+            if (widget.onPagePause != null) {
+              widget.onPagePause!(model);
+            }
+          },
+          child: child,
+        )
+      : child;
+
+  Widget _backButtonListener({required Widget child}) => widget.onBackButtonPressed != null
+      ? BackButtonListener(
+          onBackButtonPressed: () => widget.onBackButtonPressed!(model),
+          child: child,
+        )
+      : child;
+
   Widget _mainContainer() => ChangeNotifierProvider<T>(
         create: (_) => model,
         child: Consumer<T>(
-          builder: (context, value, child) => widget.builder(
-            context,
-            model,
-            child,
-          ),
+          builder: (context, value, child) => widget.builder(context, model, child),
           child: widget.child,
         ),
       );
 
   @override
-  Widget build(BuildContext context) => _mainContainer();
+  Widget build(BuildContext context) => _focusDetector(
+        child: _backButtonListener(
+          child: _mainContainer(),
+        ),
+      );
 }

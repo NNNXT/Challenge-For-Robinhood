@@ -8,12 +8,7 @@ import 'package:challenge_for_robinhood/src/provider/main_navigation_provider.da
 class MainNavigationViewModel extends ChangeNotifier {
   final MainNavigationProvider _mainNavigationProvider;
 
-  bool get modeUnlock => _mainNavigationProvider.modeUnlock;
-
-  void updateModeUnlock() {
-    _mainNavigationProvider.modeUnlock = !modeUnlock;
-    notifyListeners();
-  }
+  bool get firstTime => _mainNavigationProvider.firstTime;
 
   MainNavigationViewModel({
     required BuildContext context,
