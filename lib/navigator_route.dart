@@ -8,9 +8,9 @@ import 'package:go_router/go_router.dart';
 // Screen
 import 'package:challenge_for_robinhood/src/features/lock_screen/screen.dart';
 import 'package:challenge_for_robinhood/src/features/main_navigation/screen.dart';
-import 'package:challenge_for_robinhood/src/features/todo/screen.dart';
+import 'package:challenge_for_robinhood/src/features/task/screen.dart';
 
-enum NavigatorRoutePath { home, lockScreen, todo }
+enum NavigatorRoutePath { home, lockScreen, task }
 
 extension NavigatorRoutePathExtension on NavigatorRoutePath {
   String get path {
@@ -21,8 +21,8 @@ extension NavigatorRoutePathExtension on NavigatorRoutePath {
       case NavigatorRoutePath.lockScreen:
         return 'lockScreen';
 
-      case NavigatorRoutePath.todo:
-        return 'todo';
+      case NavigatorRoutePath.task:
+        return 'task';
 
       default:
         return '';
@@ -34,8 +34,8 @@ extension NavigatorRoutePathExtension on NavigatorRoutePath {
       case NavigatorRoutePath.lockScreen:
         return '/lockScreen';
 
-      case NavigatorRoutePath.todo:
-        return '/todo';
+      case NavigatorRoutePath.task:
+        return '/task';
 
       default:
         return '';
@@ -54,8 +54,8 @@ var _router = GoRouter(
           builder: (_, __) => const LockScreen(),
         ),
         GoRoute(
-          path: NavigatorRoutePath.todo.path,
-          builder: (_, __) => const TodoScreen(),
+          path: NavigatorRoutePath.task.path,
+          builder: (_, __) => const TaskScreen(),
         ),
       ],
     ),

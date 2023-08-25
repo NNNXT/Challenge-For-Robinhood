@@ -90,7 +90,7 @@ class LockScreen extends StatelessWidget {
               model.updateLastUnlock();
               if (model.firstTime) {
                 model.updateFirstTime();
-                context.pushReplacement(NavigatorRoutePath.todo.goPath);
+                context.pushReplacement(NavigatorRoutePath.task.goPath);
               } else {
                 context.pop();
               }
