@@ -12,6 +12,8 @@ class TodoViewmodel extends ChangeNotifier {
 
   DateTime? get _lastUnlock => _mainNavigationProvider.lastUnlock;
 
+  DateTime get timeStampPause => _timeStampPause;
+
   bool _lockApp(DateTime value) {
     if (_lastUnlock != null && DateTime.now().difference(_lastUnlock!).inSeconds < 10) {
       return false;
@@ -19,8 +21,9 @@ class TodoViewmodel extends ChangeNotifier {
     return _timeStampResume.difference(_timeStampPause).inSeconds >= 10;
   }
 
-  void updateTimeStampPause(DateTime value) {
+  set timeStampPause(DateTime value) {
     _timeStampPause = value;
+    notifyListeners();
   }
 
   bool updateTimeStampResume(DateTime value) {

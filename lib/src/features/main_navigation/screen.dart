@@ -11,12 +11,8 @@ class MainNavigation extends StatelessWidget {
   const MainNavigation({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BaseWidget<MainNavigationViewModel>(
-      model: MainNavigationViewModel(context: context),
-      builder: (_, model, __) {
-        return model.firstTime ? const LockScreen() : const TodoScreen();
-      },
-    );
-  }
+  Widget build(BuildContext context) => BaseWidget<MainNavigationViewModel>(
+        model: MainNavigationViewModel(context: context),
+        builder: (_, model, __) => model.firstTime ? const LockScreen() : const TodoScreen(),
+      );
 }

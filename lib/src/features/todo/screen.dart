@@ -13,23 +13,24 @@ class TodoScreen extends StatelessWidget {
   const TodoScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BaseWidget<TodoViewmodel>(
-      model: TodoViewmodel(context: context),
-      onModelReady: (model) {},
-      onPagePause: (model) {
-        model.updateTimeStampPause(DateTime.now());
-      },
-      onPageResume: (model) {
-        if (model.updateTimeStampResume(DateTime.now())) {
-          context.go(NavigatorRoutePath.lockScreen.goPath);
-        }
-      },
-      builder: (_, model, __) {
-        return const Scaffold(
-          body: Center(),
-        );
-      },
-    );
-  }
+  Widget build(BuildContext context) => BaseWidget<TodoViewmodel>(
+        model: TodoViewmodel(context: context),
+        onModelReady: (model) {},
+        onPagePause: (model) {
+          model.timeStampPause = DateTime.now();
+        },
+        onPageResume: (model) {
+          if (model.updateTimeStampResume(DateTime.now())) {
+            context.push(NavigatorRoutePath.lockScreen.goPath);
+          }
+        },
+        builder: (_, model, __) => Scaffold(
+          body: Center(
+            child: ElevatedButton(
+              onPressed: () {},
+              child: const Text('data'),
+            ),
+          ),
+        ),
+      );
 }
