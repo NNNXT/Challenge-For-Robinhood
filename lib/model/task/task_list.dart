@@ -2,7 +2,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 // Internal Modules
-import 'package:challenge_for_robinhood/model/todo/task.dart';
+import 'package:challenge_for_robinhood/model/task/task.dart';
 
 part 'task_list.g.dart';
 

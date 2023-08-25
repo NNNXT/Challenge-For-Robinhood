@@ -65,7 +65,10 @@ var _router = GoRouter(
 MaterialApp materialApp(BuildContext context) => MaterialApp.router(
       title: 'Challange',
       routerConfig: _router,
-      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+        primarySwatch: Colors.purple,
+      ),
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,

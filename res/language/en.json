@@ -1,3 +1,11 @@
 {
-    "password_not_match" : "Password Not Match"
+    "task" : {
+        "title" : "Hi! {}",
+        "todo" : "To Do",
+        "doing" : "Doing",
+        "done" : "Done"
+    },
+    "auth" : {
+        "password_not_match" : "Password Not Match"
+    }
 }

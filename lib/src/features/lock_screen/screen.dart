@@ -34,8 +34,10 @@ class LockScreen extends StatelessWidget {
                       6,
                       (index) => Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child:
-                            Icon(index >= model.passcodeLength ? FontAwesomeIcons.circle : FontAwesomeIcons.circleDot),
+                        child: Icon(
+                          index >= model.passcodeLength ? FontAwesomeIcons.circle : FontAwesomeIcons.circleDot,
+                          color: Colors.purple,
+                        ),
                       ),
                     ),
                   ),
@@ -95,15 +97,15 @@ class LockScreen extends StatelessWidget {
                 context.pop();
               }
             } else {
-              context.showToast(msg: 'password_not_match'.tr());
+              context.showToast(msg: 'auth.password_not_match'.tr());
             }
           }
         },
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.grey[300],
+            border: Border.all(color: Colors.purple, width: 2),
             borderRadius: const BorderRadius.all(
-              Radius.circular(100),
+              Radius.circular(128),
             ),
           ),
           width: widthWithoutPadding,
@@ -111,7 +113,10 @@ class LockScreen extends StatelessWidget {
           child: Center(
             child: Text(
               value,
-              style: const TextStyle(fontSize: 64),
+              style: const TextStyle(
+                fontSize: 64,
+                color: Colors.purple,
+              ),
             ),
           ),
         ),

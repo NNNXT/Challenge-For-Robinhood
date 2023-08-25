@@ -12,8 +12,10 @@ class LockScreenViewmodel extends ChangeNotifier {
   String _passcode = '';
 
   String get passcode => _passcode;
+
   bool get firstTime => _mainNavigationProvider.firstTime;
   bool get showRemoveButton => _passcode.isNotEmpty;
+
   int get passcodeLength => _passcode.length;
 
   Future<bool?> updatePasscode({required String value}) async {

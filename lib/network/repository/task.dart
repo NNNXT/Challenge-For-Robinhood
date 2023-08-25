@@ -1,13 +1,13 @@
 // Internal Modules
-import 'package:challenge_for_robinhood/model/todo/task.dart';
-import 'package:challenge_for_robinhood/model/todo/todo_list_response.dart';
+import 'package:challenge_for_robinhood/model/task/task.dart';
+import 'package:challenge_for_robinhood/model/task/task_list_response.dart';
 import 'package:challenge_for_robinhood/network/network.dart';
 
-class ToDoRepository extends BaseRepository {
+class TaskRepository extends BaseRepository {
   final String _requestTaskList = 'todo-list';
 
-  Future<TaskListResponse> requestTodoList({
-    required TaskType type,
+  Future<TaskListResponse> requestTaskList({
+    required TaskType taskType,
     int offset = 0,
     int limit = 10,
   }) async {
@@ -18,7 +18,7 @@ class ToDoRepository extends BaseRepository {
         'limit': limit,
         'sortBy': 'createdAt',
         'isAsc': true,
-        'status': type.toRawValue,
+        'status': taskType.toRawValue,
       },
     );
 

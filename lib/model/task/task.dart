@@ -59,13 +59,13 @@ extension BannerTypeConverter on TaskType {
   String get toRawValue {
     switch (this) {
       case TaskType.todo:
-        return _kTypeToDo;
+        return _kTypeToDo.toUpperCase();
 
       case TaskType.doing:
-        return _kTypeDoing;
+        return _kTypeDoing.toUpperCase();
 
       case TaskType.done:
-        return _kTypeDone;
+        return _kTypeDone.toUpperCase();
     }
   }
 }

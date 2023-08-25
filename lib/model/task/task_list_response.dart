@@ -1,5 +1,5 @@
 // Internal Modules
-import 'package:challenge_for_robinhood/model/todo/task_list.dart';
+import 'package:challenge_for_robinhood/model/task/task_list.dart';
 
 class TaskListResponse {
   final TaskList? result;

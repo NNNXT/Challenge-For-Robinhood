@@ -15,6 +15,7 @@ dependencies:
   dio: 5.3.2
   easy_localization: 3.0.2
   flutter_secure_storage: 8.0.0
+  flutter_slidable: 3.0.0
   fluttertoast: 8.2.2
   focus_detector: 2.0.1
   font_awesome_flutter: 10.5.0
