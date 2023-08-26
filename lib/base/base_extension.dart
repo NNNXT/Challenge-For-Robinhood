@@ -32,3 +32,16 @@ extension DateHelper on DateTime {
     return now.difference(this).inDays;
   }
 }
+
+extension ScrollNotificationType on ScrollNotification {
+  bool get isEndNotification => this is ScrollEndNotification;
+
+  bool get isStartNotification => this is ScrollStartNotification;
+
+  bool get isUpdateNotification => this is ScrollUpdateNotification;
+
+  bool get isUserNotification => this is UserScrollNotification;
+
+  bool get isLoadMoreNotification =>
+      metrics.pixels > 0.0 && metrics.pixels >= metrics.maxScrollExtent && isEndNotification;
+}

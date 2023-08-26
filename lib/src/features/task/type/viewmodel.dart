@@ -13,24 +13,47 @@ class TypeViewmodel extends ChangeNotifier {
 
   final List<Task> _taskList = [];
 
+  bool _isLastPage = false;
+
+  int _offset = 0;
+
+  bool get isLastPage => _isLastPage;
+
   List<Task> get taskList => _taskList;
 
   Future<void> fetchTaskList({
-    int offset = 0,
     int limit = 10,
     bool forceRefresh = false,
   }) async {
+    if (forceRefresh) {
+      _offset = 0;
+      _taskList.clear();
+      notifyListeners();
+    }
+
     try {
       var response = await _taskRepository.requestTaskList(
         taskType: taskType,
         limit: limit,
-        offset: offset,
+        offset: _offset,
       );
 
-      if (forceRefresh) {
-        _taskList.clear();
-      }
+      _offset++;
+      _isLastPage = (_offset == response.result?.totalPages);
 
+      _taskList.addAll(response.result?.tasks ?? []);
+      notifyListeners();
+    } catch (_) {}
+  }
+
+  Future<void> fetchTaskListMore() async {
+    try {
+      var response = await _taskRepository.requestTaskList(
+        taskType: taskType,
+        offset: _offset,
+      );
+      _offset++;
+      _isLastPage = (_offset == response.result?.totalPages);
       _taskList.addAll(response.result?.tasks ?? []);
       notifyListeners();
     } catch (_) {}

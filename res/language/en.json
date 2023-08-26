@@ -3,7 +3,8 @@
         "title" : "Hi! {}",
         "todo" : "To Do",
         "doing" : "Doing",
-        "done" : "Done"
+        "done" : "Done",
+        "empty" : "Empty"
     },
     "auth" : {
         "password_not_match" : "Password Not Match"
