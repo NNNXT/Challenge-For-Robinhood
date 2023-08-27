@@ -42,7 +42,7 @@ class TypeScreen extends StatelessWidget {
                           model.fetchTaskListMore();
                         }
                       },
-                      child: const Text('Try again'),
+                      child: Text('task.try_again'.tr()),
                     ),
                   ],
                 ),
