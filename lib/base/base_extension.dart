@@ -21,14 +21,14 @@ extension BuildContextProvide on BuildContext {
 
 extension DateHelper on DateTime {
   String formatDate() {
-    var formatter = DateFormat('dd MMMM yyyy');
+    DateFormat formatter = DateFormat('dd MMMM yyyy');
     return formatter.format(this);
   }
 
   bool isSameDate(DateTime other) => year == other.year && month == other.month && day == other.day;
 
   int getDifferenceInDaysWithNow() {
-    var now = DateTime.now();
+    DateTime now = DateTime.now();
     return now.difference(this).inDays;
   }
 }

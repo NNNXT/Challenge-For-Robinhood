@@ -43,7 +43,7 @@ extension NavigatorRoutePathExtension on NavigatorRoutePath {
   }
 }
 
-var _router = GoRouter(
+GoRouter _router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
       path: NavigatorRoutePath.home.path,
