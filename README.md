@@ -1,16 +1,21 @@
-# challenge_for_robinhood
+# Challenge Robinhood Project
 
-A new Flutter project.
+## How to Use
 
-## Getting Started
+**Step 1:**
 
-This project is a starting point for a Flutter application.
+```
+flutter pub get
+```
 
-A few resources to get you started if this is your first Flutter project:
+**Step 2:**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```
+flutter pub run build_runner build --delete-conflicting-outputs
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Step 3:**
+
+```
+flutter run
+```
