@@ -25,7 +25,7 @@ class AuthManager {
   }
 
   String convertToSha256(String passcode) {
-    List<int> bytes = utf8.encode(passcode);
+    var bytes = utf8.encode(passcode);
     return sha256.convert(bytes).toString();
   }
 }

@@ -7,8 +7,8 @@ abstract class BaseRepository {
   Dio get dataProvider => _dio;
 
   BaseRepository() {
-    String baseUrl = 'https://todo-list-api-mfchjooefq-as.a.run.app/';
-    BaseOptions options = BaseOptions(
+    var baseUrl = 'https://todo-list-api-mfchjooefq-as.a.run.app/';
+    var options = BaseOptions(
       receiveTimeout: const Duration(seconds: 60),
       connectTimeout: const Duration(seconds: 60),
       baseUrl: baseUrl,

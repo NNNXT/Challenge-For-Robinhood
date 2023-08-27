@@ -21,9 +21,9 @@ class LockScreen extends StatelessWidget {
         child: BaseWidget<LockScreenViewmodel>(
           model: LockScreenViewmodel(context: context),
           builder: (_, model, __) {
-            double width = context.media.size.width;
-            double padding = 16.0;
-            double widthWithoutPadding = (width - (padding * 4)) / 3.0;
+            var padding = 24.0;
+            var width = context.media.size.width - (padding * 4);
+            var widthWithoutPadding = width / 3;
             return Scaffold(
               body: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -64,8 +64,8 @@ class BaseWidgetState<T extends ChangeNotifier> extends State<BaseWidget<T>> {
         )
       : child;
 
-  Widget _mainContainer() => ChangeNotifierProvider<T>.value(
-        value: model,
+  Widget _mainContainer() => ChangeNotifierProvider<T>(
+        create: (_) => model,
         child: Consumer<T>(
           builder: (context, value, child) => widget.builder(context, model, child),
           child: widget.child,
