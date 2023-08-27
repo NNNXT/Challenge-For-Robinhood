@@ -4,9 +4,11 @@
         "todo" : "To Do",
         "doing" : "Doing",
         "done" : "Done",
-        "empty" : "Empty"
+        "empty" : "Empty",
+        "try_again" : "Try again",
+        "error" : "Something went wrong"
     },
     "auth" : {
-        "password_not_match" : "Password Not Match"
+        "password_not_match" : "Password not match"
     }
 }

@@ -14,10 +14,14 @@ class TypeViewmodel extends ChangeNotifier {
   final List<Task> _taskList = [];
 
   bool _isLastPage = false;
+  bool _isFirtLoading = false;
+  bool _haveError = false;
 
   int _offset = 0;
 
   bool get isLastPage => _isLastPage;
+  bool get isFirstLoading => _isFirtLoading;
+  bool get haveError => _haveError;
 
   List<Task> get taskList => _taskList;
 
@@ -28,9 +32,12 @@ class TypeViewmodel extends ChangeNotifier {
     if (forceRefresh) {
       _offset = 0;
       _taskList.clear();
+    }
+    if (_haveError) {
+      _haveError = false;
       notifyListeners();
     }
-
+    _isFirtLoading = true;
     try {
       var response = await _taskRepository.requestTaskList(
         taskType: taskType,
@@ -42,11 +49,19 @@ class TypeViewmodel extends ChangeNotifier {
       _isLastPage = (_offset == response.result?.totalPages);
 
       _taskList.addAll(response.result?.tasks ?? []);
+      _isFirtLoading = false;
+    } catch (_) {
+      _haveError = true;
+    } finally {
       notifyListeners();
-    } catch (_) {}
+    }
   }
 
   Future<void> fetchTaskListMore() async {
+    if (_haveError) {
+      _haveError = false;
+      notifyListeners();
+    }
     try {
       var response = await _taskRepository.requestTaskList(
         taskType: taskType,
@@ -55,8 +70,11 @@ class TypeViewmodel extends ChangeNotifier {
       _offset++;
       _isLastPage = (_offset == response.result?.totalPages);
       _taskList.addAll(response.result?.tasks ?? []);
+    } catch (_) {
+      _haveError = true;
+    } finally {
       notifyListeners();
-    } catch (_) {}
+    }
   }
 
   void removeTask({
