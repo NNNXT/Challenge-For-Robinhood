@@ -19,7 +19,6 @@ class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BaseWidget<TaskViewmodel>(
         model: TaskViewmodel(context: context),
-        onModelReady: (model) {},
         onPagePause: (model) {
           model.timeStampPause = DateTime.now();
         },
